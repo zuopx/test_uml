@@ -1,0 +1,18 @@
+@startuml
+
+class Flight {
+   flightNumber : Integer
+   departureTime : Date
+}
+
+class Dummy {
+ -field1
+ +field2
+ -method1()
+ +method2()
+ .. static ..
+ +{static}method3()
+ __ abstract __
+ +{abstract}method4()
+}
+@enduml
