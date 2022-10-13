@@ -1,0 +1,16 @@
+@startuml
+start
+
+:**改造ETSExporter**
+-> 新老ets的导出;
+
+:**升级Game.SunshineClient**
+-> 新老ets的运行
+-> 兼容Sunshine2.0;
+
+:**升级Sunshine**;
+
+:**引入Montage**;
+
+stop
+@enduml

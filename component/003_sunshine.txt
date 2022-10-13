@@ -1,0 +1,23 @@
+@startuml
+title 组件图
+
+package "Game" {
+    [SunshineClient]
+}
+
+package "Sunshine" {
+    [others]
+    [SunshineSDK]
+}
+
+Game <..> Sunshine
+
+component ETSExporter
+Game -left-> ETSExporter: use
+
+component SDK
+[SunshineClient] <-- SDK: fork
+[SunshineSDK] <-- SDK: fork
+
+@enduml
+

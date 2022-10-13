@@ -1,0 +1,4 @@
+@startuml
+[DesignPattern] ..> [Language]
+[Language] --> [C/C++,Java]
+@enduml

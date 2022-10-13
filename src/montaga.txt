@@ -1,0 +1,31 @@
+@startuml
+
+title montage模块
+
+package Sunshine {
+    component MontagePlugin {
+        [Backend1]
+    }
+    component MontageExtend {
+        [Meta1]
+    }
+}
+
+package Game {
+    component MontageImp {
+        [Meta2]
+    }
+    component MontageSDK {
+        [Backend2]
+    }
+}
+
+[MontageCore]
+[DemoTrackMeta]
+
+MontageCore -u-> Backend1: fork
+MontageCore -u-> Backend2: fork
+DemoTrackMeta -u-> Meta1: fork
+DemoTrackMeta -u-> Meta2: fork
+
+@enduml

@@ -1,0 +1,123 @@
+@startuml
+
+skinparam linetype ortho
+
+class Galaxy {
+    {static}Controller: GalaxyController
+}
+
+Galaxy *-- GalaxyController
+
+class GalaxyController {
+    fileToEditor: {str: StorylineWindow}
+    currEditor: StorylineWindow
+    -- method --
+    addEditor: StorylineWindow
+    openFile
+    onSaveFile
+}
+
+GalaxyController "1" o-r- "many" StorylineWindow
+
+class StorylineWindow {
+    _filename: str
+    _rootGraphName: str
+    _editorStyle: str
+    _eventGraphEditors: {graphName: StorrylineEditor}
+    _entityDoc: EntityDocumentDelegate
+    _singalDoc: StorylineSignalDocument
+    _variabelDoc: StorylineVariableDocument
+    -- method --
+    _createEditor: StorylineEditor
+    save
+    _serializeRootGraph
+    _serializeSubGraph
+}
+
+StorylineWindow "1" *-r- "many" StorylineEditor
+
+class StorylineEditor {
+    view: StorylineView
+    graph: StorylineGraph
+    handler: StorylineGraphHandler
+    entityDoc
+    signalDoc
+    variabelDoc
+    -- method --
+    createView
+    createGraph
+    createHandler
+    EventNodeAdded
+    EventNodeSelected
+    EventNodeDeleted
+}
+
+StorylineEditor *-- StorylineGraph
+StorylineEditor *-- StorylineView
+StorylineEditor *-- StorylineGraphHandler
+
+class StorylineView {
+    isActive: bool
+    nodeActions
+    graph: StorylineGraph
+    handler: StorylineGraphHandler
+    -- method --
+    setActive
+    createMemu
+    createNodeActions
+}
+
+class StorylineGraph {
+    nodes: {uid: StorylineNode\n[builtin_node, StorylineProxyNode]}
+    -- method --
+    createNewNode
+    getNodeCreationList
+}
+
+class StorylineGraphHandler {
+    graph: StorylineGraph
+    scene: StorylineScene
+    --- method --
+    selectNode
+    createNode
+    deleteNodeByID
+    createLine
+    deleteLine
+    createEntityNode
+    createMacroNode
+}
+
+StorylineView *-- StorylineGraph
+StorylineView *-- StorylineGraphHandler
+StorylineGraphHandler *-- StorylineGraph
+StorylineGraph o-l-o StorylineNode
+
+class StorylineNode {
+    nodeType: str
+    category: str
+    _nodeDef: NodeDef
+    graph: [None, ]
+    -- method --
+    isBuiltinNode
+}
+
+struct GNodeDefineManagers
+
+class NodeDefineMgr {
+    nodeDefines: dict
+    -- method --
+    addNodeDef(nodeType, nodeDef)
+    getNodeDef(nodeType): nodeDef
+}
+
+class NodeDef {
+    nodeType: str
+    INIT_ARGS
+}
+
+StorylineNode *-u- NodeDef
+StorylineNode -u-> GNodeDefineManagers
+GNodeDefineManagers o-- NodeDefineMgr
+NodeDefineMgr o-- NodeDef
+
+@enduml

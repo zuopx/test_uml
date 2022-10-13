@@ -1,0 +1,9 @@
+@startuml
+
+[Montage] ..> [async]
+[async] --> [coroutine]
+[async] --> [scheduler]
+[async] ..> [socket]
+[coroutine] --> [bytecode]
+
+@enduml
