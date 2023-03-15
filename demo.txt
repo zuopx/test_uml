@@ -1,0 +1,6 @@
+@startuml
+
+Sunshine -> Game: Call("CreateEntity", xxx)
+Game --> Sunshine: Call("AddEntity", xxx)
+
+@enduml

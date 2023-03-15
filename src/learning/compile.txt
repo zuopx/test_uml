@@ -1,0 +1,14 @@
+@startuml
+(SourceCode) -r-> (Tokens): Scanner
+
+(Tokens) -r-> (Syntax Tree): Parser
+
+(Syntax Tree) -r-> (Commented Syntax Tree): Semantic Analyzer
+
+(Commented Syntax Tree) --> (Intermediate Representation): Source Code Optimizer
+
+(Intermediate Representation) -l-> (Target Code): Code Generator
+
+(Target Code) -l-> (Final Target Code): Code Optimizer
+
+@enduml

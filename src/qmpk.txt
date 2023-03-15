@@ -1,0 +1,14 @@
+@startuml
+
+component qmpk {
+}
+
+qmpk -l-> [game]: notify
+
+[game] -r-> qmpk: request
+
+qmpk -u-> [db]
+
+[gm_tool] -u-> qmpk
+
+@enduml
